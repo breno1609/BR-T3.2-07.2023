@@ -12,6 +12,7 @@ class Dinosaur:
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = X_POS
         self.dino_rect.y = Y_POS
+        self.velocidade = 0
         
         self.dino_run = True
         self.dino_jump = False
@@ -20,12 +21,16 @@ class Dinosaur:
         self.jump_vel = JUMP_VEL
     
     def run(self):
-        self.image = RUNNING[0] if self.step_index < 5 else RUNNING[1] #ternary operator 
+
+        self.step_index +=1  
+        if self.step_index >= len(RUNNING):
+            self.step_index = 0
+        #self.image = RUNNING[0] if self.step_index < 5 else RUNNING[1] #ternary operator 
+        self.image = RUNNING[self.step_index]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = X_POS
         self.dino_rect.y = Y_POS
-        self.step_index+=1        
-
+             
     def jump(self):
         self.image = JUMPING
         
@@ -43,7 +48,10 @@ class Dinosaur:
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = X_POS
         self.dino_rect.y = Y_POS_DUCK
-        self.step_index += 1       
+        self.step_index += 1     
+
+    def mover_right(self):
+        self.dino_rect.x += self.velocidade
     
     def update(self, user_input):
         if user_input[pygame.K_UP] and not self.dino_jump:
@@ -63,6 +71,10 @@ class Dinosaur:
 
         elif user_input[pygame.K_UP] and user_input[pygame.K_DOWN]:
             self.jump_vel -= 1.5
+        
+        if user_input[pygame.K_RIGHT] and not self.dino_duck:
+            self.velocidade = 5
+            self.mover_right()
         
         if self.dino_run:
             self.run()
