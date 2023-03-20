@@ -39,6 +39,11 @@ class Dinosaur:
     def jump(self):
         self.image = JUMPING
         self.jump_sounf.play()
+        self.som = False
+
+        if not self.som:
+            self.jump_sounf.play()
+            self.som = True
         
         if self.dino_jump:
             self.dino_rect.y -= self.jump_vel*4
@@ -48,6 +53,7 @@ class Dinosaur:
             self.dino_jump = False
             self.dino_rect.y = Y_POS
             self.jump_vel = JUMP_VEL
+            self.som = False
     
     def duck(self):
         self.image = DUCKING[0] if self.step_index < 5 else DUCKING[1]
