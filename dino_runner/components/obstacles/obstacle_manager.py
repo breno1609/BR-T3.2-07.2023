@@ -3,6 +3,8 @@ import random
 from dino_runner.components.obstacles.cactus import *
 from dino_runner.components.obstacles.bird import *
 from dino_runner.utils.constants import * 
+from dino_runner.components.obstacles.gameover import *
+
 
 
 class ObstacleManager:
