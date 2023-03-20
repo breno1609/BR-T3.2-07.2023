@@ -3,6 +3,7 @@ import pygame
 from dino_runner.utils.constants import *
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
+from dino_runner.components.obstacles.scores import *
 
 class Game:
     def __init__(self):
@@ -18,6 +19,7 @@ class Game:
         
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
+        self.scores = Scores()
         
 
     def run(self):
@@ -48,6 +50,7 @@ class Game:
         
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
+        self.scores.draw(self.screen)
         
         #pygame.display.update()
         pygame.display.flip()
