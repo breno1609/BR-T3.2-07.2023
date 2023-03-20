@@ -15,7 +15,7 @@ class ObstacleManager:
 
 
         if len(self.obstacles) == 0: #SE A LISTA ESTIVER VAZIA
-            random_obstacle = random.randint(0, 2) # GERA UM NUMERO ALEATOPIO ENTRE 0 E2, PARA ESCOLHER QUAL OBJETO VAI APARECER NA TELA
+            random_obstacle = random.randint(0, 3) # GERA UM NUMERO ALEATOPIO ENTRE 0 E2, PARA ESCOLHER QUAL OBJETO VAI APARECER NA TELA
 
             if random_obstacle == 0: #SE O NUMERO SORTEADO FOR 0, VAI APARECER O CACTU PEQUENO      
                 self.obstacles.append(Cactus(SMALL_CACTUS)) 
