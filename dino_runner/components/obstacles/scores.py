@@ -16,3 +16,4 @@ class Scores: #VAI FAZER A CONTAGEM DOS PONTOS
 
         if self.pontos % 100 == 0: #A CADA 100 PONTOS, VAI EMITIR UM SOM. SE O NUMERO FOR DIVISIVEL POR 100 E RESTAR 0
             self.sound_effect.play()
+        
