@@ -6,9 +6,14 @@ Y_POS = 310
 JUMP_VEL = 8.5
 Y_POS_DUCK = 340
 
+
+
+
 class Dinosaur:
     def __init__(self):
         self.image = RUNNING[0]
+        pygame.mixer.init()
+        self.jump_sounf = pygame.mixer.Sound('dino_runner/assets/sons/jump_sound.wav')
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = X_POS
         self.dino_rect.y = Y_POS
@@ -33,6 +38,7 @@ class Dinosaur:
              
     def jump(self):
         self.image = JUMPING
+        self.jump_sounf.play()
         
         if self.dino_jump:
             self.dino_rect.y -= self.jump_vel*4
