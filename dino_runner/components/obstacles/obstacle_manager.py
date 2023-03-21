@@ -30,8 +30,12 @@ class ObstacleManager:
             if game.player.dino_rect.colliderect(obstacle.rect): #VERIFICA SE TEM COLISAO DO DINOSSAURO COM OS OBSTACULOS DA LISTA
                 pygame.time.delay(500) #ESPERA ESSE TEMPO PRO JOGADOR PERCEBER QUE COLIDIU
                 game.playing = False #ALTERA O ESTADO DO JOGO PARA FALSE
+                game.death_count += 1
                 break #PARA O JOGO
     
     def draw(self, screen):
         for obstacle in self.obstacles: #PARA CADA OBJETO DENTRO DA LISTA
             obstacle.draw(screen) #DESENHA O OBJETO NA TELA
+    
+    def reset_obstacles(self):
+        self.obstacles.clear()
