@@ -11,6 +11,16 @@ IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 # Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
 
+MOEDAS = [
+    pygame.image.load(os.path.join(IMG_DIR, 'Moeads/moedas1.png')),
+    pygame.image.load(os.path.join(IMG_DIR, 'Moeads/moedas2.png')),
+    pygame.image.load(os.path.join(IMG_DIR, 'Moeads/moedas3.png')),
+    pygame.image.load(os.path.join(IMG_DIR, 'Moeads/moedas4.png')),
+    pygame.image.load(os.path.join(IMG_DIR, 'Moeads/moedas5.png')),
+    pygame.image.load(os.path.join(IMG_DIR, 'Moeads/moedas6.png')),
+    pygame.image.load(os.path.join(IMG_DIR, 'Moeads/moedas7.png')),
+]
+
 RUNNING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
