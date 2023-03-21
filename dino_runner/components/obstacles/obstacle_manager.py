@@ -35,6 +35,7 @@ class ObstacleManager:
                 game.playing = False #ALTERA O ESTADO DO JOGO PARA FALSE
                 game.death_count += 1
                 break #PARA O JOGO
+            
     
     def draw(self, screen):
         for obstacle in self.obstacles: #PARA CADA OBJETO DENTRO DA LISTA
