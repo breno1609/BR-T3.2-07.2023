@@ -2,6 +2,7 @@ import pygame
 import random
 from dino_runner.components.obstacles.cactus import *
 from dino_runner.components.obstacles.bird import *
+from dino_runner.components.obstacles.moedas import *
 from dino_runner.utils.constants import * 
 from dino_runner.components.obstacles.gameover import *
 
@@ -23,6 +24,8 @@ class ObstacleManager:
                 self.obstacles.append(LargeCactus(LARGE_CACTUS))
             elif random_obstacle == 2: #SE FOR 2, VAI APARECER O PASSARINHO
                 self.obstacles.append(Bird(BIRD))
+            elif random_obstacle == 3:
+                self.obstacles.append(Moedas(MOEDAS))
 
 
         for obstacle in self.obstacles: #PARA CADA OBSTACULO NA LISTA
