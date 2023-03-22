@@ -5,12 +5,15 @@ from dino_runner.components.obstacles.bird import *
 from dino_runner.components.obstacles.moedas import *
 from dino_runner.utils.constants import * 
 from dino_runner.components.obstacles.gameover import *
+from dino_runner.components.obstacles.cloud import *
+
 
 
 
 class ObstacleManager:
     def __init__(self):
         self.obstacles = []
+        self.clouds = []
 
     def update(self, game):
 
@@ -26,6 +29,9 @@ class ObstacleManager:
                 self.obstacles.append(Bird(BIRD))
             elif random_obstacle == 3:
                 self.obstacles.append(Moedas(MOEDAS))
+        
+        if len(self.clouds) == 0:
+            self.clouds.append(Cloud(CLOUD))
 
 
         for obstacle in self.obstacles: #PARA CADA OBSTACULO NA LISTA
@@ -34,12 +40,18 @@ class ObstacleManager:
                 pygame.time.delay(500) #ESPERA ESSE TEMPO PRO JOGADOR PERCEBER QUE COLIDIU
                 game.playing = False #ALTERA O ESTADO DO JOGO PARA FALSE
                 game.death_count += 1
-                break #PARA O JOGO
+                break 
+        
+        for cloud in self.clouds:
+            cloud.update(game.game_speed, self.clouds)
             
     
     def draw(self, screen):
         for obstacle in self.obstacles: #PARA CADA OBJETO DENTRO DA LISTA
             obstacle.draw(screen) #DESENHA O OBJETO NA TELA
+        
+        for cloud in self.clouds:
+            cloud.draw(screen)
     
     def reset_obstacles(self):
         self.obstacles.clear()
