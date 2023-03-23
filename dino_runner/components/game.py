@@ -36,6 +36,7 @@ class Game:
 
     def run(self):
          # Game loop: events - update - draw
+        
         self.playing = True
         if self.death_count == 0:
             self.reset_game()
@@ -59,7 +60,6 @@ class Game:
     def update(self):
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)       
-        
         self.obstacle_manager.update(self)
         
 
@@ -107,8 +107,11 @@ class Game:
             text_rect.center = (half_screen_height, half_screen_width)
             self.screen.blit(text, text_rect)
 
-        pygame.display.update()
+            text_r = font.render("Press (r) to continue restart", True, (0, 0, 0))
+            text_r = text.get_rect()
+            text_r.center = (half_screen_height, half_screen_width)
 
+        pygame.display.update()
         self.handle_events_on_menu()
 
     def handle_events_on_menu(self):
@@ -120,4 +123,7 @@ class Game:
                 if pygame.key.get_pressed()[pygame.K_s] and self.death_count == 0:
                     self.run()
                 elif pygame.key.get_pressed()[pygame.K_c]:
+                    self.run()
+                elif pygame.key.get_pressed()[pygame.K_r]:
+                    self.death_count = 0
                     self.run()
