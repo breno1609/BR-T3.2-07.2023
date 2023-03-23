@@ -16,6 +16,7 @@ class Game:
         self.playing = False
         self.game_speed = 20
         self.x_pos_bg = 0
+        self.life = 2
         self.y_pos_bg = 380
         self.executing = False
         self.death_count = 0
@@ -30,7 +31,6 @@ class Game:
         while self.executing:
             if not self.playing:
                 self.show_menu()
-
         pygame.display.quit()
         pygame.quit()
 
@@ -94,22 +94,26 @@ class Game:
         half_screen_width = SCREEN_WIDTH // 2
 
         if self.death_count == 0:
+            x = 500
+            y = 200
             font = pygame.font.Font(FONT_STYLE, 22)
             text = font.render("Press (S) to start playing", True, (0, 0, 0))
             text_rect = text.get_rect()
-            text_rect.center = (half_screen_height, half_screen_width)
+            text_rect.center = (x, y)
             self.screen.blit(text, text_rect)
         
         else:
+            x = 500
+            y = 200
             font = pygame.font.Font(FONT_STYLE, 22)
             text = font.render("Press (C) to continue playing", True, (0, 0, 0))
             text_rect = text.get_rect()
-            text_rect.center = (half_screen_height, half_screen_width)
+            text_rect.center = (x, y)
             self.screen.blit(text, text_rect)
 
             text_r = font.render("Press (r) to continue restart", True, (0, 0, 0))
             text_r = text.get_rect()
-            text_r.center = (half_screen_height, half_screen_width)
+            text_r.center = (x, y)
 
         pygame.display.update()
         self.handle_events_on_menu()
