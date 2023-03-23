@@ -18,14 +18,14 @@ class ObstacleManager:
     def update(self, game):
 
 
-        if len(self.obstacles) == 0: #SE A LISTA ESTIVER VAZIA
-            random_obstacle = random.randint(0, 4) # GERA UM NUMERO ALEATOPIO ENTRE 0 E2, PARA ESCOLHER QUAL OBJETO VAI APARECER NA TELA
+        if len(self.obstacles) == 0: 
+            random_obstacle = random.randint(0, 4) 
 
-            if random_obstacle == 0: #SE O NUMERO SORTEADO FOR 0, VAI APARECER O CACTU PEQUENO      
+            if random_obstacle == 0:   
                 self.obstacles.append(Cactus(SMALL_CACTUS)) 
-            elif random_obstacle == 1: #SE FOR 1, VAI APARECER O CACTU GRANDE
+            elif random_obstacle == 1: 
                 self.obstacles.append(LargeCactus(LARGE_CACTUS))
-            elif random_obstacle == 2: #SE FOR 2, VAI APARECER O PASSARINHO
+            elif random_obstacle == 2: 
                 self.obstacles.append(Bird(BIRD))
             elif random_obstacle == 3:
                 self.obstacles.append(Moedas(MOEDAS))
@@ -36,11 +36,11 @@ class ObstacleManager:
             self.clouds.append(Cloud(CLOUD))
 
 
-        for obstacle in self.obstacles: #PARA CADA OBSTACULO NA LISTA
-            obstacle.update(game.game_speed, self.obstacles)  #CHAMA O METODO UPDATE DE CADA OBJETO, PASSA A VELOCIDADE DO JODO E A LISTA DE OBSTACULOS COMO PARAMETRO
-            if game.player.dino_rect.colliderect(obstacle.rect): #VERIFICA SE TEM COLISAO DO DINOSSAURO COM OS OBSTACULOS DA LISTA
-                pygame.time.delay(500) #ESPERA ESSE TEMPO PRO JOGADOR PERCEBER QUE COLIDIU
-                game.playing = False #ALTERA O ESTADO DO JOGO PARA FALSE
+        for obstacle in self.obstacles: 
+            obstacle.update(game.game_speed, self.obstacles)  
+            if game.player.dino_rect.colliderect(obstacle.rect): 
+                pygame.time.delay(500) 
+                game.playing = False 
                 game.death_count += 1
                 break 
         
