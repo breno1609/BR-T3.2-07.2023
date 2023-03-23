@@ -1,103 +1,77 @@
 import pygame
 from dino_runner.utils.constants import *
 
+
 X_POS = 80
 Y_POS = 310
 JUMP_VEL = 8.5
-Y_POS_DUCK = 340
-
-
-
 
 class Dinosaur:
     def __init__(self):
+        self.type = DEFAULT_TYPE
         self.image = RUNNING[0]
-        pygame.mixer.init()
-        self.jump_sounf = pygame.mixer.Sound('dino_runner/assets/sons/jump_sound.wav')
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = X_POS
         self.dino_rect.y = Y_POS
-        self.velocidade = 0
-        
         self.dino_run = True
         self.dino_jump = False
         self.dino_duck = False
         self.step_index = 0
         self.jump_vel = JUMP_VEL
-    
-    def run(self):
+        self.has_power_up = False
 
-        self.step_index +=1  
-        if self.step_index >= len(RUNNING):
-            self.step_index = 0
-        #self.image = RUNNING[0] if self.step_index < 5 else RUNNING[1] #ternary operator 
-        self.image = RUNNING[self.step_index]
-        self.dino_rect = self.image.get_rect()
-        self.dino_rect.x = X_POS
+    def run(self):
+        self.image = RUNNING[0] if self.step_index < 5 else RUNNING[1] 
         self.dino_rect.y = Y_POS
-             
+        self.step_index+=1        
+       
     def jump(self):
         self.image = JUMPING
-        self.jump_sounf.play()
-        self.som = False
-
-        if not self.som:
-            self.jump_sounf.play()
-            self.som = True
-        
         if self.dino_jump:
-            self.dino_rect.y -= self.jump_vel*4
-            self.jump_vel -=0.8
-        
+            self.dino_rect.y -= self.jump_vel*5
+            self.jump_vel -=1
         if self.jump_vel < -JUMP_VEL:
             self.dino_jump = False
             self.dino_rect.y = Y_POS
             self.jump_vel = JUMP_VEL
-            self.som = False
     
     def duck(self):
         self.image = DUCKING[0] if self.step_index < 5 else DUCKING[1]
-        self.dino_rect = self.image.get_rect()
-        self.dino_rect.x = X_POS
-        self.dino_rect.y = Y_POS_DUCK
-        self.step_index += 1     
-
-    def mover_right(self):
-        self.dino_rect.x += self.velocidade
-    
+        self.dino_rect.y = Y_POS + 35
+        self.step_index+=1
+        self.dino_duck = False
+        
     def update(self, user_input):
+
         if user_input[pygame.K_UP] and not self.dino_jump:
             self.dino_jump = True
             self.dino_run = False
-            self.dino_duck = False
-
-        elif user_input[pygame.K_DOWN] and not self.dino_jump:
-            self.dino_jump = False
-            self.dino_run = False
+        if user_input[pygame.K_DOWN] and not self.dino_jump: 
             self.dino_duck = True
-
-        elif not (self.dino_jump or user_input[pygame.K_DOWN]):
-            self.dino_jump = False
+            self.dino_run = False
+        if user_input[pygame.K_DOWN] and self.dino_jump:
+            self.jump_vel -= 1.7
+        elif not self.dino_duck and not self.dino_jump:
             self.dino_run = True
-            self.dino_duck = False
+        if user_input[pygame.K_RIGHT]:
+            self.dino_rect.x +=10
+            if self.dino_rect.x > 1000:
+                self.dino_rect.x = 1000  
+        elif user_input[pygame.K_LEFT]:
+            self.dino_rect.x -=10
+            if self.dino_rect.x < 1:
+                self.dino_rect.x = 1
 
-        elif user_input[pygame.K_UP] and user_input[pygame.K_DOWN]:
-            self.jump_vel -= 1.5
-        
-        if user_input[pygame.K_RIGHT] and not self.dino_duck:
-            self.velocidade = 5
-            self.mover_right()
-        
         if self.dino_run:
             self.run()
-        elif self.dino_jump:
-            self.jump()     
         elif self.dino_duck:
             self.duck()  
-            
+        elif self.dino_jump:
+            self.jump()      
+
+        if self.step_index >= 10: 
+            self.step_index = 0    
     
     def draw(self, screen):
         screen.blit(self.image, (self.dino_rect.x,self.dino_rect.y))
 
-
-    
