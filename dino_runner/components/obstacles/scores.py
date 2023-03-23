@@ -13,7 +13,3 @@ class Scores: #VAI FAZER A CONTAGEM DOS PONTOS
         self.pontos += 1 #VAI SOMANDO +1 A CADA FRAME PERCODDIO PELO DINOSAURO
         self.text = self.font.render('Pontos: ' + str(self.pontos), True, ((0, 0, 0,))) #IMPRIME OS PONTOS NA TELA
         screen.blit(self.text, (self.x, self.y))
-
-        if self.pontos % 100 == 0: #A CADA 100 PONTOS, VAI EMITIR UM SOM. SE O NUMERO FOR DIVISIVEL POR 100 E RESTAR 0
-            self.sound_effect.play()
-        
